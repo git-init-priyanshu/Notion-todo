@@ -1,10 +1,12 @@
-import * as React from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDroppable } from "@dnd-kit/core";
 
 import addNewCard from "@/helpers/addNewCard";
 import Card from "./card";
 import Status from "./status";
 import { Input } from "./ui/input";
+import { DataType } from "./Home";
+import getData from "@/helpers/getData";
 
 export enum statusType {
   not_started = "Not started",
@@ -23,19 +25,31 @@ type StatusColumnPropType = {
   setIsAddingCard: React.Dispatch<React.SetStateAction<boolean>>;
   isCardDeleted: boolean;
   setIsCardDeleted: React.Dispatch<React.SetStateAction<boolean>>;
+  isCardUpdated: boolean;
 };
 export default function StatusColumn({
   status,
   cards,
+  isAddingCard,
   setIsAddingCard,
   isCardDeleted,
   setIsCardDeleted,
+  isCardUpdated,
 }: StatusColumnPropType) {
-  const inputRef = React.useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const { setNodeRef } = useDroppable({ id: status });
 
-  const [newCardTitle, setNewCardTitle] = React.useState("");
+  const [newCardTitle, setNewCardTitle] = useState("");
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const data: DataType[] = getData();
+    const statusIndex = data.findIndex((item) => item.status === status);
+
+    const count = data[statusIndex].cards.length;
+    setCount(count);
+  }, [status, isAddingCard, isCardDeleted, isCardUpdated]);
 
   const addNewCardOnBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
     if (!inputRef.current || !newCardTitle) return;
@@ -80,6 +94,10 @@ export default function StatusColumn({
           onChange={(e) => setNewCardTitle(e.target.value)}
           placeholder="+ New"
         />
+      </div>
+
+      <div className="flex justify-end text-neutral-400">
+        <p>Total: {count}</p>
       </div>
     </div>
   );

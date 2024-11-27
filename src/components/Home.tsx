@@ -64,6 +64,7 @@ export default function Home() {
               setIsAddingCard={setIsAddingCard}
               isCardDeleted={isCardDeleted}
               setIsCardDeleted={setIsCardDeleted}
+              isCardUpdated={isCardUpdated}
             />
           );
         })}
