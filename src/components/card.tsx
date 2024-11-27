@@ -1,10 +1,7 @@
-// import { Trash2 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { statusType } from "./status";
-// import getData from "@/helpers/getData";
-// import { DataType } from "./Home";
-// import addData from "@/helpers/addData";
 import { useDraggable } from "@dnd-kit/core";
+import { useNavigate } from "react-router-dom";
+
+import { statusType } from "./statusColumn";
 
 type CardPropType = {
   id: string;
@@ -13,13 +10,7 @@ type CardPropType = {
   isCardDeleted: boolean;
   setIsCardDeleted: React.Dispatch<React.SetStateAction<boolean>>;
 };
-export default function Card({
-  id,
-  status,
-  title,
-}: // isCardDeleted,
-// setIsCardDeleted,
-CardPropType) {
+export default function Card({ id, status, title }: CardPropType) {
   const navigate = useNavigate();
 
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
@@ -31,17 +22,6 @@ CardPropType) {
       }
     : undefined;
 
-  // const deleteCard = () => {
-  //   const data: DataType[] = getData();
-
-  //   const statusIndex = data.findIndex((item) => item.status === status);
-  //   data[statusIndex].cards = data[statusIndex].cards.filter((e) => {
-  //     return e.id !== id;
-  //   });
-
-  //   addData(data);
-  //   setIsCardDeleted(true);
-  // };
   return (
     <div
       ref={setNodeRef}
@@ -53,12 +33,6 @@ CardPropType) {
     >
       <div className="w-full flex bg-neutral-100 rounded-[0.5rem] shadow-sm px-4 py-2 mb-2 cursor-pointer hover:bg-neutral-200">
         {title}
-        {/* <Trash2
-          size={20}
-          strokeWidth={1}
-          className="invisible group-hover:visible absolute right-2"
-          onClick={deleteCard}
-        /> */}
       </div>
     </div>
   );

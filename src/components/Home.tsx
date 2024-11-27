@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { DndContext, DragEndEvent } from "@dnd-kit/core";
+import {
+  DndContext,
+  DragEndEvent,
+  MouseSensor,
+  TouchSensor,
+  useSensor,
+} from "@dnd-kit/core";
 
 import updateCardStatus from "@/helpers/updateCardStatus";
 import Header from "./Header";
@@ -52,11 +58,28 @@ export default function Home() {
     setIsCardUdpated(true);
   };
 
+  const mouseSensor = useSensor(MouseSensor, {
+    // Require the mouse to move by 10 pixels before activating
+    activationConstraint: {
+      distance: 10,
+    },
+  });
+  const touchSensor = useSensor(TouchSensor, {
+    // Press delay of 250ms, with tolerance of 5px of movement
+    activationConstraint: {
+      delay: 250,
+      tolerance: 5,
+    },
+  });
+
   return (
     <>
       <Header />
-      <div className="flex gap-4 mx-20 mt-20 justify-evenly">
-        <DndContext onDragEnd={handleDragEnd}>
+      <div className="flex gap-4 mx-20 mt-20 justify-evenly min-w-[800px] overflow-auto">
+        <DndContext
+          onDragEnd={handleDragEnd}
+          sensors={[mouseSensor, touchSensor]}
+        >
           {data.map((e) => {
             return (
               <StatusColumn

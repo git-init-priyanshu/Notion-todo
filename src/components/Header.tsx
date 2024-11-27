@@ -7,7 +7,7 @@ export default function Header() {
     <div className="flex mx-20 my-4 justify-between">
       <div className="flex gap-2 items-end">
         <img src={Peakflo} className="w-10" />
-        <p className="text-neutral-500">Peakflo Internship Assignment</p>
+        <p className="hidden md:block text-neutral-500">Peakflo Internship Assignment</p>
       </div>
 
       <div className="flex gap-4 items-center">
