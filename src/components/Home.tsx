@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
 
 import updateCardStatus from "@/helpers/updateCardStatus";
+import Header from "./Header";
 import StatusColumn, { statusType, CardType } from "./statusColumn";
 
 export const initialData: DataType[] = [
@@ -52,23 +53,26 @@ export default function Home() {
   };
 
   return (
-    <div className="flex gap-4 mx-20 mt-20 justify-evenly">
-      <DndContext onDragEnd={handleDragEnd}>
-        {data.map((e) => {
-          return (
-            <StatusColumn
-              key={e.status}
-              status={e.status}
-              cards={e.cards}
-              isAddingCard={isAddingCard}
-              setIsAddingCard={setIsAddingCard}
-              isCardDeleted={isCardDeleted}
-              setIsCardDeleted={setIsCardDeleted}
-              isCardUpdated={isCardUpdated}
-            />
-          );
-        })}
-      </DndContext>
-    </div>
+    <>
+      <Header />
+      <div className="flex gap-4 mx-20 mt-20 justify-evenly">
+        <DndContext onDragEnd={handleDragEnd}>
+          {data.map((e) => {
+            return (
+              <StatusColumn
+                key={e.status}
+                status={e.status}
+                cards={e.cards}
+                isAddingCard={isAddingCard}
+                setIsAddingCard={setIsAddingCard}
+                isCardDeleted={isCardDeleted}
+                setIsCardDeleted={setIsCardDeleted}
+                isCardUpdated={isCardUpdated}
+              />
+            );
+          })}
+        </DndContext>
+      </div>
+    </>
   );
 }
