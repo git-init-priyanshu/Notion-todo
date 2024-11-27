@@ -61,7 +61,7 @@ export default function StatusColumn({
   };
 
   return (
-    <div ref={setNodeRef} className={` w-full p-2 rounded-[0.5rem]`}>
+    <div ref={setNodeRef} className="w-full p-2 min-w-[250px] rounded-[0.5rem] bg-neutral-50 mb-10">
       <Status status={status} />
 
       {cards.map((data) => {

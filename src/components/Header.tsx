@@ -4,7 +4,7 @@ import X from "@/assets/X-Logo.png";
 
 export default function Header() {
   return (
-    <div className="flex mx-20 my-4 justify-between">
+    <div className="flex mx-10 md:mx-20 my-4 justify-between">
       <div className="flex gap-2 items-end">
         <img src={Peakflo} className="w-10" />
         <p className="hidden md:block text-neutral-500">Peakflo Internship Assignment</p>

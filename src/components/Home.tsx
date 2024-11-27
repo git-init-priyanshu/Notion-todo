@@ -10,6 +10,7 @@ import {
 import updateCardStatus from "@/helpers/updateCardStatus";
 import Header from "./Header";
 import StatusColumn, { statusType, CardType } from "./statusColumn";
+import AddNewStatusColumn from "./addNewStatusColumn";
 
 export const initialData: DataType[] = [
   {
@@ -34,6 +35,7 @@ export default function Home() {
   const [isAddingCard, setIsAddingCard] = useState(false);
   const [isCardDeleted, setIsCardDeleted] = useState(false);
   const [isCardUpdated, setIsCardUdpated] = useState(false);
+  const [isAddingNewStatus, setIsAddingNewStatus] = useState(false);
   const [data, setData] = useState<DataType[]>(initialData);
 
   useEffect(() => {
@@ -43,7 +45,7 @@ export default function Home() {
     setData(JSON.parse(todoData));
     setIsCardDeleted(false);
     setIsCardUdpated(false);
-  }, [isAddingCard, isCardDeleted, isCardUpdated]);
+  }, [isAddingCard, isCardDeleted, isCardUpdated, isAddingNewStatus]);
 
   const handleDragEnd = (e: DragEndEvent) => {
     const { active, over } = e;
@@ -75,7 +77,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <div className="flex gap-4 mx-20 mt-20 justify-evenly min-w-[800px] overflow-auto">
+      <div className="flex gap-4 mx-10 md:mx-20 mt-20 justify-evenly overflow-auto">
         <DndContext
           onDragEnd={handleDragEnd}
           sensors={[mouseSensor, touchSensor]}
@@ -94,6 +96,10 @@ export default function Home() {
               />
             );
           })}
+          <AddNewStatusColumn
+            isAddingNewStatus={isAddingNewStatus}
+            setIsAddingNewStatus={setIsAddingNewStatus}
+          />
         </DndContext>
       </div>
     </>

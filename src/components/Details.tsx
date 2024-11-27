@@ -68,15 +68,15 @@ export default function Details() {
   );
 
   return (
-    <div className="mx-20 mt-20">
-      <div className="flex w-full justify-between">
+    <div className="mx-10 md:mx-20 mt-20">
+      <div className="flex w-full justify-between mb-8 items-center">
         <Input
           value={title}
           onChange={(e) => {
             setTitle(e.target.value);
             debounce(e.target.value);
           }}
-          className="border-none outline-none font-bold h-max mb-8"
+          className="border-none outline-none font-bold h-max truncate"
           style={{ fontSize: "3rem" }}
         />
         <Button

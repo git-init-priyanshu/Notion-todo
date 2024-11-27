@@ -7,8 +7,10 @@ export default function Status({ status }: { status: statusType }) {
         return "bg-red-300";
       case statusType.in_progress:
         return "bg-blue-300";
-      default:
+      case statusType.completed:
         return "bg-green-300";
+      default:
+        return "bg-neutral-300";
     }
   };
 
