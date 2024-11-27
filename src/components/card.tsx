@@ -20,9 +20,8 @@ export default function Card({
   isCardDeleted,
   setIsCardDeleted,
 }: CardPropType) {
-  // const cardRef = useRef<HTMLDivElement>(null);
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
-    id: "draggable-card",
+    id: `${status}_${id}`,
   });
   const style = transform
     ? {
@@ -44,8 +43,10 @@ export default function Card({
   return (
     <div
       ref={setNodeRef}
-      className="relative group cursor-pointer flex"
+      {...listeners}
+      {...attributes}
       style={style}
+      className="relative group cursor-pointer flex"
     >
       <div className="w-full flex bg-neutral-100 rounded-[0.5rem] shadow-sm px-4 py-2 mb-2 cursor-pointer hover:bg-neutral-200">
         {title}

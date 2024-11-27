@@ -5,7 +5,7 @@ import { Input } from "./ui/input";
 import getData from "@/helpers/getData";
 import addData from "@/helpers/addData";
 import { DataType } from "@/App";
-import { DndContext } from "@dnd-kit/core";
+import { DndContext, useDroppable } from "@dnd-kit/core";
 
 export enum statusType {
   not_started = "Not started",
@@ -36,6 +36,8 @@ export default function Status({
 }: StatusPropType) {
   const inputRef = React.useRef<HTMLInputElement>(null);
 
+  const { setNodeRef } = useDroppable({ id: status });
+
   const [newCardTitle, setNewCardTitle] = React.useState("");
 
   const getBgColor = () => {
@@ -65,7 +67,7 @@ export default function Status({
   };
 
   return (
-    <div className={` w-full p-2 rounded-[0.5rem]`}>
+    <div ref={setNodeRef} className={` w-full p-2 rounded-[0.5rem]`}>
       <div className={`${getBgColor()}-300 w-fit px-2 rounded-[0.2rem] mb-2`}>
         {status}
       </div>
